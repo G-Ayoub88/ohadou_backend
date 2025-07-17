@@ -1,4 +1,4 @@
-package request;
+package com.example.ohadou_auto_backend.request;
 
 public class LoginRequest {
     private String email;

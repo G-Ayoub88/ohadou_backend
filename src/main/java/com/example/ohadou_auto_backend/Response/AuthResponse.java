@@ -1,4 +1,4 @@
-package Response;
+package com.example.ohadou_auto_backend.Response;
 
 public class AuthResponse {
 

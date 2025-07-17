@@ -1,4 +1,4 @@
-package config;
+package com.example.ohadou_auto_backend.config;
 
 import javax.crypto.SecretKey;
 

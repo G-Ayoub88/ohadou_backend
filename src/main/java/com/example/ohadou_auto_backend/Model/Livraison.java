@@ -1,9 +1,10 @@
-package Model;
+package com.example.ohadou_auto_backend.Model;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
+@Table(name = "livraison")
 public class Livraison {
 
     @Id
@@ -32,9 +33,28 @@ public class Livraison {
     @Column(name = "transporteur")
     private String transporteur;
 
+    @OneToOne(mappedBy = "livraison")
+    private Commende commande;
+
+    public Livraison(){}
+    public Livraison(Long id, String adresseLivraison, LocalDate dateLivraison, StatutLivraison statutLivraison, String nomDestinataire, String telephoneDestinataire, String numeroSuivi, String transporteur, Commende commande) {
+        this.id = id;
+        this.adresseLivraison = adresseLivraison;
+        this.dateLivraison = dateLivraison;
+        this.statutLivraison = statutLivraison;
+        this.nomDestinataire = nomDestinataire;
+        this.telephoneDestinataire = telephoneDestinataire;
+        this.numeroSuivi = numeroSuivi;
+        this.transporteur = transporteur;
+        this.commande = commande;
+    }
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getAdresseLivraison() {
@@ -91,5 +111,13 @@ public class Livraison {
 
     public void setTransporteur(String transporteur) {
         this.transporteur = transporteur;
+    }
+
+    public Commende getCommande() {
+        return commande;
+    }
+
+    public void setCommande(Commende commande) {
+        this.commande = commande;
     }
 }

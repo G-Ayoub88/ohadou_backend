@@ -1,4 +1,4 @@
-package config;
+package com.example.ohadou_auto_backend.config;
 
 
 import io.jsonwebtoken.Claims;
@@ -18,7 +18,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.crypto.SecretKey;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class JwtValidator extends OncePerRequestFilter {

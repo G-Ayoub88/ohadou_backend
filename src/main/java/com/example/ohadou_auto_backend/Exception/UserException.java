@@ -1,4 +1,4 @@
-package Exception;
+package com.example.ohadou_auto_backend.Exception;
 
 public class UserException extends Exception {
 

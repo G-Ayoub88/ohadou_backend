@@ -1,10 +1,8 @@
-package Model;
+package com.example.ohadou_auto_backend.Model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 public class Category {
@@ -15,20 +13,22 @@ public class Category {
 
     private String name;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "parentCategory_id")
-    private Category parentCategory;
+
 
     private int level;
+    @OneToMany(mappedBy = "category")
+    private List<Product> products;
+
+
 
 
     public Category() {}
 
-    public Category(long id, String name, Category parentCategory, int level) {
+    public Category(long id, String name, int level, List<Product> products) {
         this.id = id;
         this.name = name;
-        this.parentCategory = parentCategory;
         this.level = level;
+        this.products = products;
     }
 
     public long getId() {
@@ -47,14 +47,6 @@ public class Category {
         this.name = name;
     }
 
-    public Category getParentCategory() {
-        return parentCategory;
-    }
-
-    public void setParentCategory(Category parentCategory) {
-        this.parentCategory = parentCategory;
-    }
-
     public int getLevel() {
         return level;
     }
@@ -62,5 +54,14 @@ public class Category {
     public void setLevel(int level) {
         this.level = level;
     }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
+
 
 }

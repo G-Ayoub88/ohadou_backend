@@ -1,4 +1,4 @@
-package Model;
+package com.example.ohadou_auto_backend.Model;
 
 import jakarta.persistence.*;
 
@@ -13,13 +13,13 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-
+    @Column(name = "title")
     private String title;
 
-
+    @Column(name = "description")
     private String description;
 
-
+    @Column(name = "prix")
     private double price;
 
     @Column(name = "discounted_price")
@@ -34,25 +34,24 @@ public class Product {
     @Column(name = "image_url")
     private String imageUrl;
 
-    @OneToMany(mappedBy = "product",cascade = CascadeType.ALL,orphanRemoval = true)
-    private List<Category>category=new ArrayList<>();
-
-//    @OneToMany(mappedBy = "product",cascade = CascadeType.ALL,orphanRemoval = true)
-//    private List<Review> reviews=new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
 
     @Column(name = "num_category")
     private int numCategory;
 
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    private Category category1;
+    @ManyToMany(mappedBy = "products")
+    private List<Commende> commandes = new ArrayList<>();
+
 
     private LocalDateTime createdAt;
 
 
     public Product() {}
 
-    public Product(Long id, String title, String description, double price, int discountedPrice, int discountPercent, int quantity, String imageUrl, int numCategory, Category category1, LocalDateTime createdAt) {
+
+    public Product(Long id, String title, String description, double price, int discountedPrice, int discountPercent, int quantity, String imageUrl, Category category, int numCategory, List<Commende> commandes, LocalDateTime createdAt) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -61,8 +60,9 @@ public class Product {
         this.discountPercent = discountPercent;
         this.quantity = quantity;
         this.imageUrl = imageUrl;
+        this.category = category;
         this.numCategory = numCategory;
-        this.category1 = category1;
+        this.commandes = commandes;
         this.createdAt = createdAt;
     }
 
@@ -130,6 +130,13 @@ public class Product {
         this.imageUrl = imageUrl;
     }
 
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 
     public int getNumCategory() {
         return numCategory;
@@ -139,12 +146,12 @@ public class Product {
         this.numCategory = numCategory;
     }
 
-    public Category getCategory1() {
-        return category1;
+    public List<Commende> getCommandes() {
+        return commandes;
     }
 
-    public void setCategory1(Category category1) {
-        this.category1 = category1;
+    public void setCommandes(List<Commende> commandes) {
+        this.commandes = commandes;
     }
 
     public LocalDateTime getCreatedAt() {
